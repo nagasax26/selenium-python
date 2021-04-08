@@ -30,14 +30,15 @@ class TechStepAcademy(BasePage):
     url = 'https://techstepacademy.com/trial-of-the-stones/'
 
 
-browser = TechStepAcademy()
-browser.go()
+def run_page():
+    browser = TechStepAcademy()
+    browser.go()
 
-merchants = PageWithListings(browser.page_source)
+    merchants = PageWithListings(browser.page_source)
 
-wealth = merchants.highest_price.wealth
-name = merchants.highest_price.name
-assert wealth == 3000, print(f"Assert Failed: wealth={wealth}")
-assert name == 'Jessica', print(f"Assert Failed: name={name}")
-print('Test Passed')
-browser.close()
+    wealth = merchants.highest_price.wealth
+    name = merchants.highest_price.name
+    assert wealth == 3000, print(f"Assert Failed: wealth={wealth}")
+    assert name == 'Jessica', print(f"Assert Failed: name={name}")
+    print('Test Passed')
+    browser.close()
