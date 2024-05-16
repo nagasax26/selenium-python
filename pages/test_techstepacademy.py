@@ -31,7 +31,7 @@ class TechStepAcademy(BasePage):
 
 
 def run_page():
-    browser = TechStepAcademy()
+    browser = TechStepAcademy(no_gui=True)
     browser.go()
 
     merchants = PageWithListings(browser.page_source)

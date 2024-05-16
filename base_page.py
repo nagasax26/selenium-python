@@ -1,11 +1,10 @@
 import time
 from selenium import webdriver
-from decouple import config
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 
 chrome_options = Options()
-executable_path = config('EXECUTABLE_PATH')
-
 
 class BasePage:
     url = None
@@ -17,7 +16,13 @@ class BasePage:
             if no_gui:
                 chrome_options.add_argument('--headless')
                 chrome_options.add_argument('--disable-gpu')
-            self.driver = webdriver.Chrome(executable_path=executable_path, options=chrome_options)
+            # self.driver = webdriver.Chrome(service=service, options=chrome_options)
+            self.driver = webdriver.Chrome(
+                service=Service(
+                    ChromeDriverManager().install()
+                ),
+                options=chrome_options
+            )
 
     def go(self):
         self.driver.get(self.url)
